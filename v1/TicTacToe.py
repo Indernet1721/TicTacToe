@@ -3,8 +3,8 @@ from pygame.locals import *
 import time
 
 pygame.init()
-
-screen_width = 600
+#Ccreate Window 
+screen_width = 600 
 screen_height = 600
 line_colour = (255,255,255)
 icon = pygame.image.load('./assets/Icon.png')
@@ -17,6 +17,7 @@ tile_size = 200
 bg = pygame.image.load("./assets/Background.jpg")
 bg = pygame.transform.scale(bg, (screen_width, screen_height))
 
+#Create Win_lines
 line_img = pygame.image.load("./assets/line.png")
 line_img = pygame.transform.scale(line_img, (screen_width-20, 130))
 scaled_line = pygame.transform.scale(line_img, (screen_width+90, 130))
@@ -24,11 +25,12 @@ diag1_image = pygame.transform.rotate(scaled_line, 45)
 diag2_image = pygame.transform.rotate(scaled_line, 135)
 col_image = pygame.transform.rotate(line_img, 90)
 
+#Create images
 x_img = pygame.image.load('./assets/x.png')
 o_img = pygame.image.load('./assets/o.png')
 
-win_row = None # updated on win
-
+# updated on win
+win_row = None 
 
 class World:
     def __init__(self, data):
@@ -37,6 +39,7 @@ class World:
 
 
 
+#Darw world_data
         row_count = 0
         for row in data:
             col_count = 0
@@ -61,6 +64,8 @@ class World:
         for tile in self.tile_list:
             window.blit(tile[0], tile[1])
 
+
+#The game world
 world_data = [
     [0, 0, 0],
     [0, 0, 0],
@@ -69,6 +74,7 @@ world_data = [
 
 
 world = World(world_data)
+#(Position; size)
 area_rect1 = pygame.Rect(0, 0, 200, 200)
 area_rect2 = pygame.Rect(200, 0, 200, 200)
 area_rect3 = pygame.Rect(400, 0, 200, 200)
@@ -81,6 +87,7 @@ area_rect9 = pygame.Rect(400, 400, 200, 200)
 run = True
 
 xTurn = True
+
 xWin_data = [
     [1, 1, 1],
     [1, 1, 1],
@@ -186,26 +193,6 @@ def checkwin():
                 window.blit(diag2_image, (25, 10))
                 return True
 
-        
-        
-
-
-# def draw_line():
-#     start = None
-#     end = None
-    
-#     if win_row == 0:
-#         start = (area_rect1.width/2,area_rect1.height/2)
-#         end = (area_rect3.width/2, area_rect3.height/2)
-        
-#     elif win_row == 1:
-#         start = (area_rect4.width/2,area_rect4.height/2)
-#         end = (area_rect6.width/2, area_rect6.height/2)
-#     else:
-#         return
-        
-#     pygame.draw.line(window, line_colour, start, end, width=5000)
-    
     
         
 
@@ -317,12 +304,11 @@ while run:
             checkwin()
                     
                     
-    # draw_line()
 
 
 
-    # print(run_checkwin)
-    # print(world_data)
+
+
     world = World(world_data) 
     world.draw()  
     pygame.display.update()
