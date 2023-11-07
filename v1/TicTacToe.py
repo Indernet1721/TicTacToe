@@ -19,9 +19,9 @@ bg = pygame.transform.scale(bg, (screen_width, screen_height))
 
 line_img = pygame.image.load("./assets/line.png")
 line_img = pygame.transform.scale(line_img, (screen_width-20, 130))
-diag1_image = pygame.transform.rotate(line_img, 45)
-diag2_image = pygame.transform.rotate(line_img, 135)
-diag2_image = pygame.transform.rotate(line_img, 135)
+scaled_line = pygame.transform.scale(line_img, (screen_width+90, 130))
+diag1_image = pygame.transform.rotate(scaled_line, 45)
+diag2_image = pygame.transform.rotate(scaled_line, 135)
 col_image = pygame.transform.rotate(line_img, 90)
 
 x_img = pygame.image.load('./assets/x.png')
@@ -48,7 +48,6 @@ class World:
                     img_rect.y = row_count * tile_size+25
                     tile = (img, img_rect)
                     self.tile_list.append(tile)
-
                 if tile == 2:
                     img = pygame.transform.scale(o_img, (tile_size-50, tile_size-50))
                     img_rect = img.get_rect()
@@ -58,7 +57,6 @@ class World:
                     self.tile_list.append(tile)
                 col_count += 1
             row_count += 1
-
     def draw(self):
         for tile in self.tile_list:
             window.blit(tile[0], tile[1])
@@ -112,7 +110,7 @@ def checkwin():
                 if win_row == 0:
                     window.blit(line_img, (0, 75))
                 if win_row == 1:
-                    window.blit(line_img, (0, 75*(win_row+2)))
+                    window.blit(line_img, (0, 75*(win_row+2.3)))
                 if win_row == 2:
                     window.blit(line_img, (0, 75*(win_row+4)))
                 run_checkwin = False
@@ -122,7 +120,7 @@ def checkwin():
                 if win_row == 0:
                     window.blit(line_img, (0, 75))
                 if win_row == 1:
-                    window.blit(line_img, (0, 75*(win_row+2)))
+                    window.blit(line_img, (0, 75*(win_row+1)))
                 if win_row == 2:
                     window.blit(line_img, (0, 75*(win_row+4)))
                 run_checkwin = False
@@ -163,7 +161,7 @@ def checkwin():
             if world_data[0][2] == 1:
                 print("X hat gewonnen!")
                 
-                window.blit(diag1_image, (0, 75))
+                window.blit(diag1_image, (50, 0))
                 run_checkwin = False
                 return
 
@@ -179,14 +177,16 @@ def checkwin():
             if rotated_world_data[0][2] == 1:
                 print("X hat gewonnen!")
                 
+                window.blit(diag2_image, (25, 10))
                 return True
             else:
 
                 print("O hat gewonnen!")
                 
+                window.blit(diag2_image, (25, 10))
                 return True
 
-        return (False, None)
+        
         
 
 
